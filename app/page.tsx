@@ -519,19 +519,13 @@ export default function SlerfonbasePage() {
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <Button
-                    onClick={() => {
-                      shareToEarn("twitter")
-                      window.open('https://twitter.com/slerf00', '_blank')
-                    }}
+                    onClick={() => shareToEarn("twitter")}
                     className="bg-blue-500 hover:bg-blue-600 text-white text-sm py-2"
                   >
                     Share on X
                   </Button>
                   <Button
-                    onClick={() => {
-                      shareToEarn("telegram")
-                      window.open('https://t.me/boomtokn', '_blank')
-                    }}
+                    onClick={() => shareToEarn("telegram")}
                     className="bg-blue-400 hover:bg-blue-500 text-white text-sm py-2"
                   >
                     Share on TG
@@ -1060,7 +1054,6 @@ export default function SlerfonbasePage() {
               <CardContent className="p-6 text-center">
                 <h3 className="text-red-400 text-xl font-bold mb-2">🔥 COMMUNITY RAID ACTIVE</h3>
                 <p className="mb-4">Join the Twitter raid! Like, retweet, and comment on our latest post</p>
-                <p className="text-sm text-blue-300 mb-4">Follow @slerf00 for updates</p>
                 <div className="flex justify-between items-center mb-4">
                   <span>Participants: {raidParticipants}</span>
                   <span className="text-yellow-400">Goal: 1000</span>
@@ -1071,10 +1064,7 @@ export default function SlerfonbasePage() {
                     style={{ width: `${Math.min((raidParticipants / 1000) * 100, 100)}%` }}
                   />
                 </div>
-                <Button 
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-full"
-                  onClick={() => window.open('https://twitter.com/slerf00', '_blank')}
-                >
+                <Button className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-full">
                   JOIN RAID
                 </Button>
               </CardContent>
@@ -1171,10 +1161,7 @@ export default function SlerfonbasePage() {
           <Button className="social-button bg-gray-900 hover:bg-gray-800 text-white font-bold py-4 px-6 rounded-full text-lg">
             🔍 DEXSCREENER
           </Button>
-          <Button 
-            className="social-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-full text-lg"
-            onClick={() => window.open('https://t.me/boomtokn', '_blank')}
-          >
+          <Button className="social-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 px-6 rounded-full text-lg">
             ✈️ TELEGRAM
           </Button>
           <Button className="social-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-6 rounded-full text-lg">
@@ -1183,34 +1170,32 @@ export default function SlerfonbasePage() {
           <Button className="social-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-6 rounded-full text-lg">
             👻 PHANTOM
           </Button>
-          <Button 
-            className="social-button bg-blue-400 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-full text-lg"
-            onClick={() => window.open('https://twitter.com/slerf00', '_blank')}
-          >
+          <Button className="social-button bg-blue-400 hover:bg-blue-500 text-white font-bold py-4 px-6 rounded-full text-lg">
             🐦 TWITTER
           </Button>
         </div>
+      </div>
 
-        <div className="text-center py-12 px-4">
-          <h2 className="title-3d text-4xl md:text-5xl text-yellow-400 mb-8 tracking-wider">TRADE SLERF</h2>
-          <p className="text-xl mb-8">Swap tokens instantly with the best rates</p>
+      <div className="text-center py-12 px-4">
+        <h2 className="title-3d text-4xl md:text-5xl text-yellow-400 mb-8 tracking-wider">TRADE SLERF</h2>
+        <p className="text-xl mb-8">Swap tokens instantly with the best rates</p>
 
-          <div className="flex justify-center mb-8">
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-yellow-400/30">
-              <iframe
-                id="dextswap-aggregator-widget"
-                title="DEXTswap Aggregator"
-                width="400"
-                height="420"
-                src="https://www.dextools.io/widget-aggregator/en/swap/base/0x233df63325933fa3f2dac8e695cd84bb2f91ab07"
-                className="rounded-xl"
-              />
-            </div>
+        <div className="flex justify-center mb-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-yellow-400/30">
+            <iframe
+              id="dextswap-aggregator-widget"
+              title="DEXTswap Aggregator"
+              width="400"
+              height="420"
+              src="https://www.dextools.io/widget-aggregator/en/swap/base/0x233df63325933fa3f2dac8e695cd84bb2f91ab07"
+              className="rounded-xl"
+            />
           </div>
         </div>
+      </div>
 
-        <div className="text-center py-12 px-4">
-          <h2 className="title-3d text-4xl md:text-5xl text-yellow-400 mb-8 tracking-wider">COMMUNITY GOALS</h2>
+      <div className="text-center py-12 px-4">
+        <h2 className="title-3d text-4xl md:text-5xl text-yellow-400 mb-8 tracking-wider">COMMUNITY GOALS</h2>
 
         <div className="max-w-2xl mx-auto space-y-6">
           <Card className="bg-white/10 backdrop-blur-sm border-yellow-400/30">
@@ -1348,5 +1333,5 @@ export default function SlerfonbasePage() {
         <p className="text-white/80">© 2024 SLERFONBASE. All rights reserved.</p>
       </div>
     </div>
-  )\
+  )
 }
