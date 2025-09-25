@@ -112,7 +112,7 @@ importers:
         version: 8.5.1(react@19.0.0)
       geist:
         specifier: latest
-        version: 1.4.2(next@15.4.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+        version: 1.5.1(next@15.4.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       input-otp:
         specifier: 1.4.1
         version: 1.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -139,7 +139,7 @@ importers:
         version: 7.60.0(react@19.0.0)
       react-resizable-panels:
         specifier: ^2.1.7
-        version: 2.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 2.1.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       recharts:
         specifier: 2.15.4
         version: 2.15.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -1353,8 +1353,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  geist@1.4.2:
-    resolution: {integrity: sha512-OQUga/KUc8ueijck6EbtT07L4tZ5+TZgjw8PyWfxo16sL5FWk7gNViPNU8hgCFjy6bJi9yuTP+CRpywzaGN8zw==}
+  geist@1.5.1:
+    resolution: {integrity: sha512-mAHZxIsL2o3ZITFaBVFBnwyDOw+zNLYum6A6nIjpzCGIO8QtC3V76XF2RnZTyLx1wlDTmMDy8jg3Ib52MIjGvQ==}
     peerDependencies:
       next: '>=13.2.0'
 
@@ -1580,8 +1580,8 @@ packages:
       '@types/react':
         optional: true
 
-  react-resizable-panels@2.1.7:
-    resolution: {integrity: sha512-JtT6gI+nURzhMYQYsx8DKkx6bSoOGFp7A3CwMrOb8y5jFHFyqwo9m68UhmXRw57fRVJksFn1TSlm3ywEQ9vMgA==}
+  react-resizable-panels@2.1.9:
+    resolution: {integrity: sha512-z77+X08YDIrgAes4jl8xhnUu1LNIRp4+E7cv4xHmLOxxUPO/ML7PSrE813b90vj7xvQ1lcf7g2uA9GeMZonjhQ==}
     peerDependencies:
       react: ^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
       react-dom: ^16.14.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
@@ -2865,7 +2865,7 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  geist@1.4.2(next@15.4.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)):
+  geist@1.5.1(next@15.4.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)):
     dependencies:
       next: 15.4.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
@@ -3051,7 +3051,7 @@ snapshots:
     optionalDependencies:
       '@types/react': 19.0.0
 
-  react-resizable-panels@2.1.7(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  react-resizable-panels@2.1.9(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
