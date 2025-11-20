@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -127,7 +126,131 @@
   }
 }
 
-/* Added TONY-style 3D text effects and custom styles */
+/* Enhanced mobile animations for top-notch engagement */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.8);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile-optimized animation utilities */
+.animate-fade-in {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-fade-in-delay {
+  animation: slideUp 0.6s ease-out 0.2s backwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.animate-slide-left {
+  animation: fadeInSlide 0.5s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Smooth transitions for all interactive elements */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .animate-fade-in {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .smooth-transition {
+    transition: all 0.2s ease-out;
+  }
+  
+  button {
+    min-height: 44px;
+    @apply smooth-transition;
+  }
+}
+
+/* 3D text and visual effects */
 .title-3d {
   text-shadow: 3px 3px 0px #d97706, 6px 6px 0px #92400e, 9px 9px 0px #451a03, 12px 12px 15px rgba(0, 0, 0, 0.3);
   font-weight: 900;
@@ -138,6 +261,11 @@
   border: 4px solid #fbbf24;
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(251, 191, 36, 0.5), inset 0 0 20px rgba(251, 191, 36, 0.2);
+  transition: all 0.3s ease;
+}
+
+.golden-border:hover {
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.8), inset 0 0 30px rgba(251, 191, 36, 0.3);
 }
 
 .social-button {
@@ -189,4 +317,15 @@
 
 .float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
