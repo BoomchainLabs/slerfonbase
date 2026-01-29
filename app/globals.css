@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -230,8 +231,10 @@
 }
 
 /* Smooth transitions for all interactive elements */
-.smooth-transition {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+@layer components {
+  .smooth-transition {
+    @apply transition-all duration-300;
+  }
 }
 
 /* Mobile-specific optimizations */
@@ -240,13 +243,15 @@
     animation: slideUp 0.5s ease-out;
   }
   
-  .smooth-transition {
-    transition: all 0.2s ease-out;
+  @layer components {
+    .smooth-transition {
+      transition: all 0.2s ease-out;
+    }
   }
   
   button {
     min-height: 44px;
-    @apply smooth-transition;
+    transition: all 0.2s ease-out;
   }
 }
 

@@ -1,14 +1,15 @@
 {
-  "name": "SLERF - Play, Earn, Trade Crypto",
+  "name": "SLERF - The Viral Token on Base",
   "short_name": "SLERF",
-  "description": "The viral DeFi token on Base. Play games and earn real SLERF tokens.",
+  "description": "Play games, farm yield, and earn real SLERF tokens on Base blockchain",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#1e40af",
+  "background_color": "#000000",
   "theme_color": "#1e40af",
-  "categories": ["finance", "productivity"],
+  "categories": ["finance", "productivity", "games"],
+  "prefer_related_applications": false,
   "screenshots": [
     {
       "src": "/screenshot-1.png",
@@ -54,27 +55,22 @@
       "name": "Play Game",
       "short_name": "Play",
       "description": "Start playing and earning SLERF tokens",
-      "url": "/?action=play",
-      "icons": [
-        {
-          "src": "/shortcut-play.png",
-          "type": "image/png",
-          "sizes": "96x96"
-        }
-      ]
+      "url": "/game",
+      "icons": [{"src": "/shortcut-play.png", "type": "image/png", "sizes": "96x96"}]
     },
     {
-      "name": "Trade",
-      "short_name": "Trade",
-      "description": "Trade SLERF tokens on DEXs",
-      "url": "/?action=trade",
-      "icons": [
-        {
-          "src": "/shortcut-trade.png",
-          "type": "image/png",
-          "sizes": "96x96"
-        }
-      ]
+      "name": "Yield Farming",
+      "short_name": "Farm",
+      "description": "Earn high APY on your SLERF tokens",
+      "url": "/farming",
+      "icons": [{"src": "/shortcut-farm.png", "type": "image/png", "sizes": "96x96"}]
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "View your portfolio",
+      "url": "/dashboard",
+      "icons": [{"src": "/shortcut-dashboard.png", "type": "image/png", "sizes": "96x96"}]
     }
   ]
 }

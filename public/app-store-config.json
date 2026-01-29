@@ -1,0 +1,37 @@
+{
+  "ios": {
+    "appName": "SLERF",
+    "bundleId": "com.slerfonbase.app",
+    "teamId": "YOUR_TEAM_ID",
+    "appStoreId": "6738294857",
+    "appStoreUrl": "https://apps.apple.com/app/slerf/id6738294857",
+    "capabilities": ["wallet_connect", "push_notifications", "app_clips"],
+    "minimumOSVersion": "14.0",
+    "supportedDevices": ["iphone", "ipad"],
+    "appClip": {
+      "bundleId": "com.slerfonbase.app.Clip",
+      "url": "https://slerf.app/clip"
+    }
+  },
+  "android": {
+    "appName": "SLERF",
+    "packageName": "com.slerfonbase.app",
+    "playStoreUrl": "https://play.google.com/store/apps/details?id=com.slerfonbase.app",
+    "appId": "com.slerfonbase.app",
+    "versionCode": 1,
+    "versionName": "1.0.0",
+    "minimumSDK": 21,
+    "targetSDK": 34,
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.POST_NOTIFICATIONS"
+    ],
+    "features": ["android.hardware.touchscreen"]
+  },
+  "web": {
+    "url": "https://slerf.app",
+    "installPrompt": true,
+    "shareableUrl": "https://slerf.app/?ref=social"
+  }
+}

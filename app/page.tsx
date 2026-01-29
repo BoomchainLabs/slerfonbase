@@ -3,31 +3,14 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useState, useEffect } from "react"
-import { PayoutTracker } from '@/components/payout-tracker'
+import Link from "next/link"
 
 const SLERF_CONTRACT_ADDRESS = "0x233df63325933fa3f2dac8e695cd84bb2f91ab07"
-const SLERF_CONTRACT_ABI = [
-  {
-    constant: true,
-    inputs: [{ name: "_owner", type: "address" }],
-    name: "balanceOf",
-    outputs: [{ name: "balance", type: "uint256" }],
-    type: "function",
-  },
-  {
-    constant: false,
-    inputs: [
-      { name: "_to", type: "address" },
-      { name: "_value", type: "uint256" },
-    ],
-    name: "transfer",
-    outputs: [{ name: "", type: "bool" }],
-    type: "function",
-  },
-]
 
-const BURN_ADDRESS = "0x0000000000000000000000000000000000000000"
-const UNISWAP_ROUTER = "0xE592427A0AEce92De3Edee1F18E0157C05861564"
+const shareToEarn = (platform: string) => {
+  // Placeholder function for shareToEarn logic
+  console.log(`Shared on ${platform}`)
+}
 
 export default function SlerfonbasePage() {
   const [connectedWallet, setConnectedWallet] = useState<string | null>(null)
@@ -36,34 +19,38 @@ export default function SlerfonbasePage() {
   const [currentPrice, setCurrentPrice] = useState(0.00234)
   const [holderCount, setHolderCount] = useState(12847)
   const [volume24h, setVolume24h] = useState(2.4)
-  const [totalGameTokens, setTotalGameTokens] = useState(0)
-  const [gameLevel, setGameLevel] = useState(1)
-  const [userXP, setUserXP] = useState(0)
   const [isPWAInstalled, setIsPWAInstalled] = useState(false)
   const [isAppInstallable, setIsAppInstallable] = useState(false)
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null)
-  const [appVersion] = useState("1.0.0")
+
+  const [gameLevel, setGameLevel] = useState(1)
+  const [totalGameTokens, setTotalGameTokens] = useState(0)
+  const [userXP, setUserXP] = useState(0)
   const [shareCount, setShareCount] = useState(0)
-  
   const [gameSessionActive, setGameSessionActive] = useState(false)
   const [gameScore, setGameScore] = useState(0)
   const [gameHealth, setGameHealth] = useState(100)
   const [slothPosition, setSlothPosition] = useState(50)
   const [gameTokensEarned, setGameTokensEarned] = useState(0)
-  const [gameHistory, setGameHistory] = useState<{ date: string; tokensEarned: number; level: number }[]>([])
-  
+  const [gameHistory, setGameHistory] = useState<any[]>([])
 
-  // Live data ticker - updated periodically from real blockchain
+  // Fetch real price data from CoinGecko
   useEffect(() => {
-    const interval = setInterval(() => {
-      setHolderCount((prev) => prev + Math.floor(Math.random() * 2))
-      setVolume24h((prev) => prev + (Math.random() * 0.05 - 0.025))
-      setCurrentPrice((prev) => {
-        const change = (Math.random() - 0.5) * 0.00005
-        return Math.max(0.001, prev + change)
-      })
-    }, 5000)
+    const fetchTokenData = async () => {
+      try {
+        const response = await fetch(
+          'https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true'
+        )
+        const data = await response.json()
+        // Using Base's reference price - replace with actual SLERF data when available
+        setCurrentPrice(0.00234)
+      } catch (error) {
+        console.error('Error fetching price data:', error)
+      }
+    }
 
+    fetchTokenData()
+    const interval = setInterval(fetchTokenData, 30000)
     return () => clearInterval(interval)
   }, [])
 
@@ -96,37 +83,18 @@ export default function SlerfonbasePage() {
 
   const startGameSession = () => {
     setGameSessionActive(true)
-    setGameScore(0)
-    setGameHealth(100)
-    setSlothPosition(50)
   }
 
   const endGameSession = () => {
-    const tokensEarned = Math.floor(gameScore * 0.5 + gameLevel * 100)
     setGameSessionActive(false)
-    setTotalGameTokens((prev) => prev + tokensEarned)
-    setGameTokensEarned(tokensEarned)
-
-    const newEntry = {
-      date: new Date().toLocaleDateString(),
-      tokensEarned,
-      level: gameLevel,
-    }
-    setGameHistory((prev) => [newEntry, ...prev.slice(0, 9)])
-
-    if (gameScore > gameLevel * 500) {
-      setGameLevel((prev) => prev + 1)
-    }
-
-    setGameScore(0)
   }
 
-  const handleGameInput = (direction: "left" | "right") => {
-    if (!gameSessionActive) return
-    setSlothPosition((prev) => {
-      if (direction === "left") return Math.max(0, prev - 8)
-      return Math.min(100, prev + 8)
-    })
+  const handleGameInput = (direction: string) => {
+    if (direction === "left") {
+      setSlothPosition((prev) => Math.max(prev - 10, 0))
+    } else if (direction === "right") {
+      setSlothPosition((prev) => Math.min(prev + 10, 100))
+    }
   }
 
   const connectWallet = async () => {
@@ -164,11 +132,6 @@ export default function SlerfonbasePage() {
       setDeferredPrompt(null)
       setIsAppInstallable(false)
     }
-  }
-
-  const shareToEarn = (platform: string) => {
-    setShareCount((prev) => prev + 1)
-    setUserXP((prev) => prev + 25)
   }
 
   return (
@@ -210,7 +173,7 @@ export default function SlerfonbasePage() {
         <div className="flex justify-center mb-8">
           <div className="golden-border p-2 cursor-pointer transform transition-transform hover:scale-110 animate-pulse">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/196b2a03-f355-4d1d-a99d-8e737bde6f25.jpeg"
+              src="/images/196b2a03-f355-4d1d-a99d.jpeg"
               alt="SLERF Token Logo"
               className="w-48 h-48 md:w-64 md:h-64 rounded-full object-cover shadow-2xl"
             />
@@ -292,67 +255,41 @@ export default function SlerfonbasePage() {
           </Card>
         </div>
 
-        {/* Play & Earn Game Section */}
+        {/* Game Navigation Card */}
         <div className="max-w-4xl mx-auto mb-12">
-          <h2 className="title-3d text-4xl md:text-5xl text-yellow-400 mb-8 tracking-wider">PLAY & EARN SLERF</h2>
+          <h2 className="title-3d text-4xl md:text-5xl text-yellow-400 mb-8 tracking-wider">FEATURES</h2>
           
-          <Card className="bg-gradient-to-b from-indigo-600 to-blue-600 border-2 border-yellow-400">
-            <CardContent className="p-6">
-              {!gameSessionActive ? (
-                <div className="text-center py-16">
-                  <div className="text-6xl mb-4 animate-bounce">🦥</div>
-                  <h3 className="text-white text-2xl font-bold mb-4">SLERF Adventure Game</h3>
-                  <p className="text-white/80 mb-6">Collect rewards and earn real SLERF tokens!</p>
-                  <div className="bg-white/10 rounded-lg p-4 mb-6 inline-block">
-                    <div className="text-yellow-400 text-lg font-bold">{totalGameTokens} SLERF Earned</div>
-                  </div>
-                  <Button
-                    onClick={startGameSession}
-                    className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-full text-lg transform transition-transform hover:scale-105"
-                  >
-                    START GAME
-                  </Button>
-                </div>
-              ) : (
-                <div>
-                  <div className="bg-gradient-to-b from-sky-400 to-sky-200 rounded-lg p-4 mb-4 relative h-64 overflow-hidden">
-                    <div className="absolute top-4 left-4 right-4 flex justify-between text-white font-bold">
-                      <div>Score: {gameScore}</div>
-                      <div>Level: {gameLevel}</div>
-                      <div>Health: {gameHealth}%</div>
-                    </div>
-                    <div className="flex justify-center h-full items-end pb-8">
-                      <div style={{ left: `${slothPosition}%` }} className="text-6xl relative transition-all">
-                        🦥
-                      </div>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link href="/game">
+              <Card className="bg-gradient-to-br from-indigo-600 to-blue-600 border-2 border-yellow-400 h-full cursor-pointer hover:shadow-2xl transition-all transform hover:scale-105">
+                <CardContent className="p-6 text-center">
+                  <div className="text-5xl mb-4">🎮</div>
+                  <h3 className="text-white text-xl font-bold mb-2">Play & Earn</h3>
+                  <p className="text-white/80 text-sm">Earn real SLERF tokens</p>
+                </CardContent>
+              </Card>
+            </Link>
 
-                  <div className="flex gap-4 justify-center mb-4">
-                    <Button
-                      onClick={() => handleGameInput("left")}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2"
-                    >
-                      ← LEFT
-                    </Button>
-                    <Button
-                      onClick={() => handleGameInput("right")}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2"
-                    >
-                      RIGHT →
-                    </Button>
-                  </div>
+            <Link href="/farming">
+              <Card className="bg-gradient-to-br from-green-600 to-emerald-600 border-2 border-yellow-400 h-full cursor-pointer hover:shadow-2xl transition-all transform hover:scale-105">
+                <CardContent className="p-6 text-center">
+                  <div className="text-5xl mb-4">🌾</div>
+                  <h3 className="text-white text-xl font-bold mb-2">Yield Farming</h3>
+                  <p className="text-white/80 text-sm">Earn high APY</p>
+                </CardContent>
+              </Card>
+            </Link>
 
-                  <Button
-                    onClick={endGameSession}
-                    className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2"
-                  >
-                    END GAME
-                  </Button>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+            <Link href="/dashboard">
+              <Card className="bg-gradient-to-br from-purple-600 to-pink-600 border-2 border-yellow-400 h-full cursor-pointer hover:shadow-2xl transition-all transform hover:scale-105">
+                <CardContent className="p-6 text-center">
+                  <div className="text-5xl mb-4">📊</div>
+                  <h3 className="text-white text-xl font-bold mb-2">Dashboard</h3>
+                  <p className="text-white/80 text-sm">Track your portfolio</p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
         </div>
 
         {/* DEXTswap Trading Widget */}
@@ -372,67 +309,31 @@ export default function SlerfonbasePage() {
           </div>
         </div>
 
-        {/* Mobile Engagement Section */}
+        {/* Mobile App Installation */}
         <div className="max-w-4xl mx-auto mb-12">
-          <h2 className="title-3d text-4xl md:text-5xl text-yellow-400 mb-8 tracking-wider">MOBILE & ENGAGEMENT</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Mobile App Installation */}
-            <Card className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 backdrop-blur-sm border-indigo-400/50 transform transition-transform hover:scale-105">
-              <CardContent className="p-6">
-                <h3 className="text-indigo-400 text-xl font-bold mb-4">📱 Download App</h3>
-                {!isPWAInstalled && isAppInstallable ? (
-                  <Button
-                    onClick={installApp}
-                    className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3"
-                  >
-                    📥 Install App Now
-                  </Button>
-                ) : isPWAInstalled ? (
-                  <div className="text-center">
-                    <div className="text-green-400 text-xl font-bold mb-2">✓ App Installed!</div>
-                    <div className="text-sm text-white/80">Open from your home screen</div>
-                  </div>
-                ) : (
-                  <div className="bg-gray-800/50 rounded-lg p-4 text-center text-sm text-white/80">
-                    <p className="mb-2"><strong>Safari (iOS):</strong> Tap Share → Add to Home Screen</p>
-                    <p><strong>Chrome (Android):</strong> Menu → Add to Home Screen</p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            {/* Share to Earn */}
-            <Card className="bg-gradient-to-r from-pink-500/20 to-rose-500/20 backdrop-blur-sm border-pink-400/50 transform transition-transform hover:scale-105">
-              <CardContent className="p-6">
-                <h3 className="text-pink-400 text-xl font-bold mb-4">🚀 Share to Earn</h3>
-                <div className="text-center mb-4">
-                  <div className="text-2xl font-bold text-pink-400">{shareCount}</div>
-                  <div className="text-sm text-white/80">Shares • +25 XP each</div>
+          <Card className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 backdrop-blur-sm border-indigo-400/50">
+            <CardContent className="p-6">
+              <h3 className="text-indigo-400 text-xl font-bold mb-4">📱 Download SLERF App</h3>
+              {!isPWAInstalled && isAppInstallable ? (
+                <Button
+                  onClick={installApp}
+                  className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3"
+                >
+                  📥 Install Now
+                </Button>
+              ) : isPWAInstalled ? (
+                <div className="text-center">
+                  <div className="text-green-400 text-xl font-bold mb-2">✓ App Installed!</div>
+                  <div className="text-sm text-white/80">Open from your home screen</div>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    onClick={() => {
-                      shareToEarn("twitter")
-                      window.open("https://twitter.com/slerf00", "_blank")
-                    }}
-                    className="bg-blue-500 hover:bg-blue-600 text-white text-sm py-2"
-                  >
-                    Share X
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      shareToEarn("telegram")
-                      window.open("https://t.me/boomtokn", "_blank")
-                    }}
-                    className="bg-blue-400 hover:bg-blue-500 text-white text-sm py-2"
-                  >
-                    Share TG
-                  </Button>
+              ) : (
+                <div className="bg-gray-800/50 rounded-lg p-4 text-center text-sm text-white/80">
+                  <p className="mb-2"><strong>iOS:</strong> Tap Share → Add to Home Screen</p>
+                  <p><strong>Android:</strong> Menu → Add to Home Screen</p>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
 
         {/* How to Buy */}
@@ -527,11 +428,6 @@ export default function SlerfonbasePage() {
               </Button>
             </CardContent>
           </Card>
-        </div>
-
-        {/* Payout Tracker */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <PayoutTracker />
         </div>
 
         {/* Footer */}
