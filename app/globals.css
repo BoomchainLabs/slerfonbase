@@ -243,10 +243,8 @@
     animation: slideUp 0.5s ease-out;
   }
   
-  @layer components {
-    .smooth-transition {
-      transition: all 0.2s ease-out;
-    }
+  .smooth-transition {
+    transition: all 0.2s ease-out;
   }
   
   button {
