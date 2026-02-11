@@ -246,7 +246,7 @@
   
   button {
     min-height: 44px;
-    @apply smooth-transition;
+    transition: all 0.2s ease-out;
   }
 }
 
